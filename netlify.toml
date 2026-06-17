@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# VITE_ANTHROPIC_API_KEY must be set in the Netlify dashboard
+# (Site settings -> Environment variables). Never commit it here.
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

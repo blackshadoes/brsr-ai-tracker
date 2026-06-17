@@ -1,0 +1,497 @@
+:root {
+  --bg: #080d1a;
+  --surface: #0f1729;
+  --card: #131e35;
+  --accent: #00d4aa;
+  --orange: #ff6b35;
+  --white: #f0f4ff;
+  --grey: #64748b;
+  --border: rgba(240, 244, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--white);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+}
+
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.topbar-brand .logo-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.topbar-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.topbar-subtitle {
+  color: var(--grey);
+  font-size: 13px;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* Home / company picker */
+.hero {
+  text-align: center;
+  margin: 60px auto 40px;
+  max-width: 720px;
+}
+
+.hero h1 {
+  font-size: 34px;
+  margin: 0 0 12px;
+  line-height: 1.25;
+}
+
+.hero p {
+  color: var(--grey);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.hero .accent-text {
+  color: var(--accent);
+}
+
+.company-form {
+  display: flex;
+  gap: 10px;
+  max-width: 520px;
+  margin: 28px auto 14px;
+}
+
+.company-input {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 13px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+.company-input:focus {
+  border-color: var(--accent);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #04201a;
+  border: none;
+  padding: 13px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.preset-chip {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.preset-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.error-text {
+  color: var(--orange);
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* Dashboard */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dashboard-header h2 {
+  font-size: 26px;
+  margin: 0 0 6px;
+}
+
+.dashboard-header .meta {
+  color: var(--grey);
+  font-size: 13px;
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(0, 212, 170, 0.12);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 6px;
+}
+
+.section {
+  margin-bottom: 36px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--grey);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.metric-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--orange);
+}
+
+.metric-label {
+  font-size: 12px;
+  color: var(--grey);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.metric-unit {
+  font-size: 13px;
+  color: var(--grey);
+  font-weight: 400;
+}
+
+.metric-sub {
+  font-size: 12px;
+  color: var(--orange);
+  margin-top: 10px;
+}
+
+.methodology-note {
+  font-size: 12px;
+  color: var(--grey);
+  margin-top: 16px;
+  line-height: 1.6;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+/* Checklist */
+.checklist {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.checklist-item {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.checklist-item:last-child {
+  border-bottom: none;
+}
+
+.checklist-item-text {
+  font-size: 14px;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.checklist-status-group {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.status-btn {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--grey);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.status-btn.active.not_disclosed {
+  background: rgba(255, 107, 53, 0.15);
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.status-btn.active.partial {
+  background: rgba(240, 244, 255, 0.1);
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.status-btn.active.disclosed {
+  background: rgba(0, 212, 170, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.checklist-summary {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--grey);
+}
+
+.checklist-summary strong {
+  color: var(--white);
+}
+
+/* Upload */
+.upload-box {
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.upload-box.has-file {
+  border-style: solid;
+  border-color: var(--accent);
+}
+
+.upload-info {
+  font-size: 13px;
+  color: var(--grey);
+}
+
+.upload-filename {
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.file-input-label {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.file-input-label:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.warning-banner {
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.35);
+  color: var(--orange);
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.findings-summary {
+  margin-top: 14px;
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.6;
+}
+
+/* Report */
+.report-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.report-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.report-text {
+  white-space: pre-wrap;
+  font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--white);
+  margin: 0;
+}
+
+.report-source-tag {
+  font-size: 11px;
+  color: var(--grey);
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(240, 244, 255, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.footer-disclaimer {
+  text-align: center;
+  color: var(--grey);
+  font-size: 12px;
+  padding: 24px;
+  border-top: 1px solid var(--border);
+}
