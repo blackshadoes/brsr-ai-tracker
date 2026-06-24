@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { COMPANY_NAMES, findCompany } from '../data/companies'
 
-export default function Home({ onSelectCompany }) {
+export default function CompanySearch({ onSelectCompany }) {
   const [query, setQuery] = useState('')
   const [error, setError] = useState('')
 
@@ -16,16 +16,21 @@ export default function Home({ onSelectCompany }) {
     onSelectCompany(company)
   }
 
+  function selectPreset(name) {
+    setError('')
+    setQuery(name)
+    onSelectCompany(findCompany(name))
+  }
+
   return (
-    <div className="hero">
-      <h1>
-        What is <span className="accent-text">{`{Company}`}</span> not telling you about AI?
-      </h1>
-      <p>
-        BRSR AI Tracker estimates the AI-driven energy, water and carbon costs that Indian IT
-        companies leave out of their Business Responsibility and Sustainability Reports — then
-        builds the disclosure gap report to take into the client meeting.
-      </p>
+    <section className="company-search-section" id="company-search">
+      <div className="section-heading">
+        <h2>Check a Company</h2>
+        <p>
+          Pick one of the 20 tracked companies to see its modeled AI energy, water and carbon
+          footprint, run the 8-item disclosure checklist, and generate a gap report.
+        </p>
+      </div>
 
       <form className="company-form" onSubmit={handleSubmit}>
         <input
@@ -34,7 +39,6 @@ export default function Home({ onSelectCompany }) {
           placeholder="Enter a company name, e.g. Infosys"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          autoFocus
         />
         <button className="btn-primary" type="submit">
           Analyse
@@ -45,19 +49,11 @@ export default function Home({ onSelectCompany }) {
 
       <div className="preset-row">
         {COMPANY_NAMES.map((name) => (
-          <button
-            key={name}
-            className="preset-chip"
-            onClick={() => {
-              setError('')
-              setQuery(name)
-              onSelectCompany(findCompany(name))
-            }}
-          >
+          <button key={name} className="preset-chip" onClick={() => selectPreset(name)}>
             {name}
           </button>
         ))}
       </div>
-    </div>
+    </section>
   )
 }

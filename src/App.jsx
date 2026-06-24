@@ -1,9 +1,19 @@
 import { useState } from 'react'
-import Home from './components/Home'
+import Landing from './components/Landing'
 import Dashboard from './components/Dashboard'
 
 export default function App() {
   const [company, setCompany] = useState(null)
+
+  function handleSelectCompany(c) {
+    setCompany(c)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function handleBack() {
+    setCompany(null)
+    window.scrollTo({ top: 0 })
+  }
 
   return (
     <div className="app-shell">
@@ -16,19 +26,22 @@ export default function App() {
           <span className="topbar-subtitle">AI environmental disclosure gap analysis</span>
         </div>
         {company && (
-          <button className="btn-ghost" onClick={() => setCompany(null)}>
-            ← Analyse another company
+          <button className="btn-ghost" onClick={handleBack}>
+            ← Back to overview
           </button>
         )}
       </header>
 
       <main className="main-content">
-        {company ? <Dashboard company={company} /> : <Home onSelectCompany={setCompany} />}
+        {company ? (
+          <Dashboard company={company} />
+        ) : (
+          <Landing onSelectCompany={handleSelectCompany} />
+        )}
       </main>
 
       <footer className="footer-disclaimer">
-        Figures shown are modeled estimates for ESG advisory use, not verified or audited
-        disclosures. Always confirm against the company's latest BRSR filing.
+        Built by Chhaya Rani · ESG Researcher · Independent · brsr-ai-tracker.netlify.app
       </footer>
     </div>
   )
