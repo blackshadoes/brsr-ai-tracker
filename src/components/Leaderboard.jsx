@@ -1,5 +1,6 @@
 import { getLeaderboard } from '../data/leaderboard'
 import { findCompany } from '../data/companies'
+import Reveal from './Reveal'
 
 export default function Leaderboard({ onSelectCompany }) {
   const rows = getLeaderboard()
@@ -24,10 +25,12 @@ export default function Leaderboard({ onSelectCompany }) {
           const company = findCompany(row.name)
           const pct = Math.round((row.score / row.maxScore) * 100)
           return (
-            <button
+            <Reveal
               key={row.name}
+              as="button"
               type="button"
               className="leaderboard-row leaderboard-row-clickable"
+              delay={Math.min(idx * 25, 450)}
               onClick={() => company && onSelectCompany(company)}
             >
               <span className="leaderboard-rank">{idx + 1}</span>
@@ -40,7 +43,7 @@ export default function Leaderboard({ onSelectCompany }) {
                   {row.score}/{row.maxScore}
                 </span>
               </span>
-            </button>
+            </Reveal>
           )
         })}
       </div>

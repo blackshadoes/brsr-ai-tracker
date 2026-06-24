@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { analyzeBrsrPdf } from '../lib/pdfAnalysis'
 import { hasApiKey } from '../lib/anthropicClient'
 import { STATUS_LABEL } from '../data/checklist'
+import Reveal from './Reveal'
 
 export default function PdfUploader({ onFindings }) {
   const [file, setFile] = useState(null)
@@ -37,7 +38,7 @@ export default function PdfUploader({ onFindings }) {
   return (
     <div className="section">
       <div className="section-title">BRSR PDF Upload (optional, AI-assisted)</div>
-      <div className={`upload-box${file ? ' has-file' : ''}`}>
+      <Reveal className={`upload-box${file ? ' has-file' : ''}`}>
         <div>
           {file ? (
             <>
@@ -76,7 +77,7 @@ export default function PdfUploader({ onFindings }) {
             )}
           </button>
         </div>
-      </div>
+      </Reveal>
 
       {!hasApiKey && (
         <div className="warning-banner">

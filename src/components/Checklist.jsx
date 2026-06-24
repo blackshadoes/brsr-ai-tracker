@@ -1,4 +1,5 @@
 import { CHECKLIST_ITEMS, DISCLOSURE_STATUSES, STATUS_LABEL } from '../data/checklist'
+import Reveal from './Reveal'
 
 export default function Checklist({ checklist, onChange }) {
   const disclosedCount = CHECKLIST_ITEMS.filter(
@@ -8,7 +9,7 @@ export default function Checklist({ checklist, onChange }) {
   return (
     <div className="section">
       <div className="section-title">8-Item AI Disclosure Checklist</div>
-      <div className="checklist">
+      <Reveal className="checklist">
         {CHECKLIST_ITEMS.map((item, idx) => {
           const current = checklist[item.id]?.status || 'not_disclosed'
           return (
@@ -31,7 +32,7 @@ export default function Checklist({ checklist, onChange }) {
             </div>
           )
         })}
-      </div>
+      </Reveal>
       <div className="checklist-summary">
         <strong>{disclosedCount} of {CHECKLIST_ITEMS.length}</strong> items disclosed for this
         company's BRSR report.

@@ -1,4 +1,5 @@
 import { estimateAIFootprint, formatNumber } from '../lib/estimate'
+import Reveal from './Reveal'
 
 export default function MetricsCards({ company }) {
   const est = estimateAIFootprint(company)
@@ -7,7 +8,7 @@ export default function MetricsCards({ company }) {
     <div className="section">
       <div className="section-title">Estimated AI Environmental Footprint (undisclosed in BRSR)</div>
       <div className="metrics-grid">
-        <div className="metric-card">
+        <Reveal className="metric-card" delay={0}>
           <div className="metric-label">AI Energy Consumption</div>
           <div className="metric-value">
             {formatNumber(est.aiEnergyMWh)} <span className="metric-unit">MWh/yr</span>
@@ -15,8 +16,8 @@ export default function MetricsCards({ company }) {
           <div className="metric-sub">
             ~{formatNumber(est.aiShareOfTotalEnergyPercent, 1)}% of disclosed total energy
           </div>
-        </div>
-        <div className="metric-card">
+        </Reveal>
+        <Reveal className="metric-card" delay={100}>
           <div className="metric-label">AI Water Usage</div>
           <div className="metric-value">
             {formatNumber(est.aiWaterKL)} <span className="metric-unit">KL/yr</span>
@@ -24,8 +25,8 @@ export default function MetricsCards({ company }) {
           <div className="metric-sub">
             ~{formatNumber(est.aiShareOfWaterPercent, 1)}% of disclosed water withdrawal
           </div>
-        </div>
-        <div className="metric-card">
+        </Reveal>
+        <Reveal className="metric-card" delay={200}>
           <div className="metric-label">AI Carbon Emissions</div>
           <div className="metric-value">
             {formatNumber(est.aiCarbonTco2e)} <span className="metric-unit">tCO2e/yr</span>
@@ -33,7 +34,7 @@ export default function MetricsCards({ company }) {
           <div className="metric-sub">
             ~{formatNumber(est.aiShareOfScope2Percent, 1)}% of disclosed Scope 2
           </div>
-        </div>
+        </Reveal>
       </div>
       <div className="methodology-note">
         Methodology: estimated GPU-hours x avg. accelerator power x PUE for energy; India grid
