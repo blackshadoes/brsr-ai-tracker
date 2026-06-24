@@ -42,20 +42,20 @@ body {
   position: relative;
 }
 
-/* Static aurora / deep-water background. Fixed so the glow stays consistent
-   at any scroll depth instead of stretching thin over a tall page. */
+/* Static, very dark base with faint aurora hints in the corners — depth
+   without color washing out the near-black background. Fixed so it stays
+   consistent at any scroll depth instead of stretching thin over a tall page. */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-color: var(--bg);
-  background-image: radial-gradient(ellipse 70% 50% at 15% 8%, rgba(0, 196, 122, 0.22), transparent 60%),
-    radial-gradient(ellipse 60% 55% at 88% 4%, rgba(13, 148, 136, 0.2), transparent 62%),
-    radial-gradient(ellipse 65% 60% at 92% 68%, rgba(0, 120, 90, 0.22), transparent 60%),
-    radial-gradient(ellipse 55% 45% at 8% 88%, rgba(13, 148, 136, 0.16), transparent 65%),
-    radial-gradient(ellipse 80% 55% at 50% 102%, rgba(0, 80, 60, 0.28), transparent 65%),
-    linear-gradient(180deg, #0a0f0a 0%, #081310 45%, #060d0b 100%);
+  background-color: #0a0f0a;
+  background-image: radial-gradient(ellipse 55% 40% at 12% 0%, rgba(0, 196, 122, 0.06), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 5%, rgba(13, 148, 136, 0.05), transparent 62%),
+    radial-gradient(ellipse 55% 45% at 95% 70%, rgba(0, 120, 90, 0.05), transparent 60%),
+    radial-gradient(ellipse 45% 35% at 5% 90%, rgba(13, 148, 136, 0.04), transparent 65%),
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0, 80, 60, 0.06), transparent 65%);
   pointer-events: none;
 }
 
@@ -91,7 +91,7 @@ a {
   height: 10px;
   border-radius: 50%;
   background: var(--emerald);
-  box-shadow: 0 0 12px var(--emerald);
+  box-shadow: 0 0 3px rgba(0, 196, 122, 0.5);
   display: inline-block;
   margin-right: 6px;
 }
@@ -227,7 +227,7 @@ a {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 26px rgba(0, 196, 122, 0.35));
+  filter: drop-shadow(0 0 6px rgba(0, 196, 122, 0.1));
 }
 
 .hero-subhead {
@@ -270,7 +270,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 22px 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .stat-value {
@@ -278,7 +278,6 @@ a {
   font-weight: 800;
   letter-spacing: -0.5px;
   color: var(--emerald);
-  text-shadow: 0 0 24px rgba(0, 196, 122, 0.35);
   margin-bottom: 8px;
 }
 
@@ -318,7 +317,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .leaderboard-row {
@@ -394,7 +393,6 @@ a {
   height: 100%;
   background: linear-gradient(90deg, var(--teal), var(--emerald));
   border-radius: 999px;
-  box-shadow: 0 0 8px rgba(0, 196, 122, 0.5);
 }
 
 .score-number {
@@ -410,14 +408,14 @@ a {
   background: rgba(0, 196, 122, 0.14);
   border: 1px solid rgba(0, 196, 122, 0.4);
   color: var(--emerald);
-  box-shadow: 0 0 14px rgba(0, 196, 122, 0.35);
+  box-shadow: 0 0 4px rgba(0, 196, 122, 0.1);
 }
 
 .score-number.score-zero {
   background: rgba(232, 168, 56, 0.12);
   border: 1px solid rgba(232, 168, 56, 0.4);
   color: var(--amber);
-  box-shadow: 0 0 14px rgba(232, 168, 56, 0.3);
+  box-shadow: 0 0 4px rgba(232, 168, 56, 0.08);
 }
 
 @media (max-width: 600px) {
@@ -462,14 +460,14 @@ a {
   font-size: 14px;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 6px 20px rgba(0, 196, 122, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 196, 122, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .btn-primary:hover {
   filter: brightness(1.08);
   transform: translateY(-1px);
-  box-shadow: 0 8px 26px rgba(0, 196, 122, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 196, 122, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .btn-primary:active {
@@ -598,7 +596,7 @@ a {
   padding: 20px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .metric-card::before {
@@ -658,7 +656,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .checklist-item {
@@ -742,7 +740,7 @@ a {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .upload-box.has-file {
@@ -818,7 +816,7 @@ a {
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .report-text {
