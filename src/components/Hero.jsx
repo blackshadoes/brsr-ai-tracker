@@ -1,7 +1,10 @@
+import { useState, useRef, useEffect } from 'react'
 import { useInView } from '../hooks/useInView'
 import { useCountUp } from '../hooks/useCountUp'
 import HeroParticles from './HeroParticles'
 import WaterBackground from './WaterBackground'
+import { COMPANY_NAMES, findCompany } from '../data/companies'
+import { getLeaderboard } from '../data/leaderboard'
 
 const STATS = [
   { value: '1.8L', label: 'water consumed per kWh of AI compute' },
@@ -25,9 +28,27 @@ function StatCard({ stat, delay }) {
   )
 }
 
-export default function Hero() {
-  function scrollToSearch() {
-    document.getElementById('company-search')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+export default function Hero({ onSelectCompany }) {
+  const [showDropdown, setShowDropdown] = useState(false)
+  const [showLeaderboard, setShowLeaderboard] = useState(false)
+  const dropdownRef = useRef(null)
+  const sortedNames = [...COMPANY_NAMES].sort()
+  const leaderboardRows = getLeaderboard()
+
+  useEffect(() => {
+    if (!showDropdown) return
+    function handleOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false)
+      }
+    }
+    document.addEventListener('mousedown', handleOutside)
+    return () => document.removeEventListener('mousedown', handleOutside)
+  }, [showDropdown])
+
+  function handleCompanySelect(name) {
+    setShowDropdown(false)
+    onSelectCompany(findCompany(name))
   }
 
   return (
@@ -45,13 +66,94 @@ export default function Hero() {
           leave out of their sustainability reports — and tracks which ones are starting to close
           the gap.
         </p>
-        <button
-          className="btn-primary btn-cta hero-anim hero-anim-delay-2"
-          type="button"
-          onClick={scrollToSearch}
-        >
-          Check a Company →
-        </button>
+
+        <div className="hero-cta-row hero-anim hero-anim-delay-2">
+          <div ref={dropdownRef} style={{ position: 'relative' }}>
+            <button
+              className="btn-primary btn-cta"
+              type="button"
+              onClick={() => {
+                setShowDropdown(v => !v)
+                setShowLeaderboard(false)
+              }}
+            >
+              Check a Company ▾
+            </button>
+            {showDropdown && (
+              <div className="company-dropdown">
+                {sortedNames.map(name => (
+                  <button
+                    key={name}
+                    className="company-dropdown-item"
+                    type="button"
+                    onClick={() => handleCompanySelect(name)}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <button
+            className="btn-ghost btn-cta"
+            type="button"
+            onClick={() => {
+              setShowLeaderboard(v => !v)
+              setShowDropdown(false)
+            }}
+          >
+            Leaderboard
+          </button>
+        </div>
+
+        {showLeaderboard && (
+          <div className="hero-leaderboard-panel">
+            <div className="hero-leaderboard-header">
+              <h3 className="hero-leaderboard-title">Company Leaderboard</h3>
+              <button
+                className="btn-ghost"
+                type="button"
+                onClick={() => setShowLeaderboard(false)}
+              >
+                ✕ Close
+              </button>
+            </div>
+            <div className="leaderboard-table">
+              <div className="leaderboard-row leaderboard-head">
+                <span>Rank</span>
+                <span>Company</span>
+                <span>Disclosure Score</span>
+              </div>
+              {leaderboardRows.map((row, idx) => {
+                const company = findCompany(row.name)
+                const pct = Math.round((row.score / row.maxScore) * 100)
+                return (
+                  <button
+                    key={row.name}
+                    type="button"
+                    className="leaderboard-row leaderboard-row-clickable"
+                    onClick={() => {
+                      setShowLeaderboard(false)
+                      if (company) onSelectCompany(company)
+                    }}
+                  >
+                    <span className="leaderboard-rank">{idx + 1}</span>
+                    <span className="leaderboard-name">{row.name}</span>
+                    <span className="leaderboard-score">
+                      <span className="score-bar">
+                        <span className="score-bar-fill" style={{ width: `${pct}%` }} />
+                      </span>
+                      <span className={`score-number${row.score === 0 ? ' score-zero' : ''}`}>
+                        {row.score}/{row.maxScore}
+                      </span>
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         <div className="stats-grid">
           {STATS.map((s, i) => (
