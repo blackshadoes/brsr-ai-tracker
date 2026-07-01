@@ -1,6 +1,7 @@
 import { useInView } from '../hooks/useInView'
 import { useCountUp } from '../hooks/useCountUp'
 import HeroParticles from './HeroParticles'
+import WaterBackground from './WaterBackground'
 
 const STATS = [
   { value: '1.8L', label: 'water consumed per kWh of AI compute' },
@@ -30,7 +31,8 @@ export default function Hero() {
   }
 
   return (
-    <section className="hero-section">
+    <section className="hero-section" style={{ position: 'relative', overflow: 'hidden' }}>
+      <WaterBackground />
       <HeroParticles />
       <div className="hero-content">
         <h1 className="hero-headline hero-anim">
