@@ -96,7 +96,7 @@ export default function Hero({ onSelectCompany }) {
           </div>
 
           <button
-            className="btn-ghost btn-cta"
+            className="btn-primary btn-cta"
             type="button"
             onClick={() => {
               setShowLeaderboard(v => !v)
@@ -108,49 +108,56 @@ export default function Hero({ onSelectCompany }) {
         </div>
 
         {showLeaderboard && (
-          <div className="hero-leaderboard-panel">
-            <div className="hero-leaderboard-header">
-              <h3 className="hero-leaderboard-title">Company Leaderboard</h3>
-              <button
-                className="btn-ghost"
-                type="button"
-                onClick={() => setShowLeaderboard(false)}
-              >
-                ✕ Close
-              </button>
-            </div>
-            <div className="leaderboard-table">
-              <div className="leaderboard-row leaderboard-head">
-                <span>Rank</span>
-                <span>Company</span>
-                <span>Disclosure Score</span>
+          <div
+            className="leaderboard-modal-backdrop"
+            onMouseDown={e => { if (e.target === e.currentTarget) setShowLeaderboard(false) }}
+          >
+            <div className="leaderboard-modal">
+              <div className="leaderboard-modal-header">
+                <h3 className="leaderboard-modal-title">Company Leaderboard</h3>
+                <button
+                  className="btn-ghost"
+                  type="button"
+                  onClick={() => setShowLeaderboard(false)}
+                >
+                  ✕ Close
+                </button>
               </div>
-              {leaderboardRows.map((row, idx) => {
-                const company = findCompany(row.name)
-                const pct = Math.round((row.score / row.maxScore) * 100)
-                return (
-                  <button
-                    key={row.name}
-                    type="button"
-                    className="leaderboard-row leaderboard-row-clickable"
-                    onClick={() => {
-                      setShowLeaderboard(false)
-                      if (company) onSelectCompany(company)
-                    }}
-                  >
-                    <span className="leaderboard-rank">{idx + 1}</span>
-                    <span className="leaderboard-name">{row.name}</span>
-                    <span className="leaderboard-score">
-                      <span className="score-bar">
-                        <span className="score-bar-fill" style={{ width: `${pct}%` }} />
-                      </span>
-                      <span className={`score-number${row.score === 0 ? ' score-zero' : ''}`}>
-                        {row.score}/{row.maxScore}
-                      </span>
-                    </span>
-                  </button>
-                )
-              })}
+              <div className="leaderboard-modal-body">
+                <div className="leaderboard-table">
+                  <div className="leaderboard-row leaderboard-head">
+                    <span>Rank</span>
+                    <span>Company</span>
+                    <span>Disclosure Score</span>
+                  </div>
+                  {leaderboardRows.map((row, idx) => {
+                    const company = findCompany(row.name)
+                    const pct = Math.round((row.score / row.maxScore) * 100)
+                    return (
+                      <button
+                        key={row.name}
+                        type="button"
+                        className="leaderboard-row leaderboard-row-clickable"
+                        onClick={() => {
+                          setShowLeaderboard(false)
+                          if (company) onSelectCompany(company)
+                        }}
+                      >
+                        <span className="leaderboard-rank">{idx + 1}</span>
+                        <span className="leaderboard-name">{row.name}</span>
+                        <span className="leaderboard-score">
+                          <span className="score-bar">
+                            <span className="score-bar-fill" style={{ width: `${pct}%` }} />
+                          </span>
+                          <span className={`score-number${row.score === 0 ? ' score-zero' : ''}`}>
+                            {row.score}/{row.maxScore}
+                          </span>
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         )}
