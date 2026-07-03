@@ -74,9 +74,6 @@ export default function App() {
         )}
       </main>
 
-      <footer className="footer-disclaimer">
-        Built by Chhaya Rani · ESG Researcher · Independent · brsr-ai-tracker.netlify.app
-      </footer>
     </div>
   )
 }

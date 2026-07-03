@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import MetricsCards from './MetricsCards'
 import Checklist from './Checklist'
-import GapReportPanel from './GapReportPanel'
 import { createEmptyChecklistState } from '../data/checklist'
 
 export default function Dashboard({ company }) {
@@ -26,7 +25,6 @@ export default function Dashboard({ company }) {
 
       <MetricsCards company={company} />
       <Checklist checklist={checklist} onChange={handleChecklistChange} />
-      <GapReportPanel company={company} checklist={checklist} pdfFindings={null} />
     </div>
   )
 }
