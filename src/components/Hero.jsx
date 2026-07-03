@@ -1,10 +1,9 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { useInView } from '../hooks/useInView'
 import { useCountUp } from '../hooks/useCountUp'
 import HeroParticles from './HeroParticles'
 import WaterBackground from './WaterBackground'
-import { COMPANY_NAMES, findCompany } from '../data/companies'
-import { getLeaderboard } from '../data/leaderboard'
+import { COMPANY_NAMES, COMPANIES, findCompany } from '../data/companies'
 
 const STATS = [
   { value: '1.8L', label: 'water consumed per kWh of AI compute' },
@@ -28,26 +27,12 @@ function StatCard({ stat, delay }) {
   )
 }
 
-export default function Hero({ onSelectCompany }) {
-  const [showDropdown, setShowDropdown] = useState(false)
-  const [showLeaderboard, setShowLeaderboard] = useState(false)
-  const dropdownRef = useRef(null)
+export default function Hero({ onSelectCompany, onShowLeaderboard }) {
+  const [showPicker, setShowPicker] = useState(false)
   const sortedNames = [...COMPANY_NAMES].sort()
-  const leaderboardRows = getLeaderboard()
-
-  useEffect(() => {
-    if (!showDropdown) return
-    function handleOutside(e) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setShowDropdown(false)
-      }
-    }
-    document.addEventListener('mousedown', handleOutside)
-    return () => document.removeEventListener('mousedown', handleOutside)
-  }, [showDropdown])
 
   function handleCompanySelect(name) {
-    setShowDropdown(false)
+    setShowPicker(false)
     onSelectCompany(findCompany(name))
   }
 
@@ -68,99 +53,21 @@ export default function Hero({ onSelectCompany }) {
         </p>
 
         <div className="hero-cta-row hero-anim hero-anim-delay-2">
-          <div ref={dropdownRef} style={{ position: 'relative' }}>
-            <button
-              className="btn-primary btn-cta"
-              type="button"
-              onClick={() => {
-                setShowDropdown(v => !v)
-                setShowLeaderboard(false)
-              }}
-            >
-              Check a Company ▾
-            </button>
-            {showDropdown && (
-              <div className="company-dropdown">
-                {sortedNames.map(name => (
-                  <button
-                    key={name}
-                    className="company-dropdown-item"
-                    type="button"
-                    onClick={() => handleCompanySelect(name)}
-                  >
-                    {name}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
           <button
             className="btn-primary btn-cta"
             type="button"
-            onClick={() => {
-              setShowLeaderboard(v => !v)
-              setShowDropdown(false)
-            }}
+            onClick={() => setShowPicker(true)}
+          >
+            Check a Company
+          </button>
+          <button
+            className="btn-primary btn-cta"
+            type="button"
+            onClick={onShowLeaderboard}
           >
             Leaderboard
           </button>
         </div>
-
-        {showLeaderboard && (
-          <div
-            className="leaderboard-modal-backdrop"
-            onMouseDown={e => { if (e.target === e.currentTarget) setShowLeaderboard(false) }}
-          >
-            <div className="leaderboard-modal">
-              <div className="leaderboard-modal-header">
-                <h3 className="leaderboard-modal-title">Company Leaderboard</h3>
-                <button
-                  className="btn-ghost"
-                  type="button"
-                  onClick={() => setShowLeaderboard(false)}
-                >
-                  ✕ Close
-                </button>
-              </div>
-              <div className="leaderboard-modal-body">
-                <div className="leaderboard-table">
-                  <div className="leaderboard-row leaderboard-head">
-                    <span>Rank</span>
-                    <span>Company</span>
-                    <span>Disclosure Score</span>
-                  </div>
-                  {leaderboardRows.map((row, idx) => {
-                    const company = findCompany(row.name)
-                    const pct = Math.round((row.score / row.maxScore) * 100)
-                    return (
-                      <button
-                        key={row.name}
-                        type="button"
-                        className="leaderboard-row leaderboard-row-clickable"
-                        onClick={() => {
-                          setShowLeaderboard(false)
-                          if (company) onSelectCompany(company)
-                        }}
-                      >
-                        <span className="leaderboard-rank">{idx + 1}</span>
-                        <span className="leaderboard-name">{row.name}</span>
-                        <span className="leaderboard-score">
-                          <span className="score-bar">
-                            <span className="score-bar-fill" style={{ width: `${pct}%` }} />
-                          </span>
-                          <span className={`score-number${row.score === 0 ? ' score-zero' : ''}`}>
-                            {row.score}/{row.maxScore}
-                          </span>
-                        </span>
-                      </button>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="stats-grid">
           {STATS.map((s, i) => (
@@ -168,6 +75,35 @@ export default function Hero({ onSelectCompany }) {
           ))}
         </div>
       </div>
+
+      {showPicker && (
+        <div
+          className="company-picker-backdrop"
+          onMouseDown={e => { if (e.target === e.currentTarget) setShowPicker(false) }}
+        >
+          <div className="company-picker-modal">
+            <div className="company-picker-header">
+              <span className="company-picker-title">Select a Company</span>
+              <button className="btn-ghost" type="button" onClick={() => setShowPicker(false)}>
+                ✕ Close
+              </button>
+            </div>
+            <div className="company-picker-list">
+              {sortedNames.map(name => (
+                <button
+                  key={name}
+                  className="company-picker-item"
+                  type="button"
+                  onClick={() => handleCompanySelect(name)}
+                >
+                  <span className="company-picker-name">{name}</span>
+                  <span className="company-picker-ticker">NSE: {COMPANIES[name]?.ticker}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
