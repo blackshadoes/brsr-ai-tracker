@@ -1,25 +1,15 @@
 import { useState } from 'react'
 import { COMPANY_NAMES, findCompany } from '../data/companies'
 
+const SORTED_NAMES = [...COMPANY_NAMES].sort()
+
 export default function CompanySearch({ onSelectCompany }) {
-  const [query, setQuery] = useState('')
-  const [error, setError] = useState('')
+  const [selected, setSelected] = useState('')
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    const company = findCompany(query)
-    if (!company) {
-      setError(`No preloaded data for "${query}". Try: ${COMPANY_NAMES.join(', ')}.`)
-      return
-    }
-    setError('')
-    onSelectCompany(company)
-  }
-
-  function selectPreset(name) {
-    setError('')
-    setQuery(name)
-    onSelectCompany(findCompany(name))
+  function handleChange(e) {
+    const name = e.target.value
+    setSelected(name)
+    if (name) onSelectCompany(findCompany(name))
   }
 
   return (
@@ -32,28 +22,16 @@ export default function CompanySearch({ onSelectCompany }) {
         </p>
       </div>
 
-      <form className="company-form" onSubmit={handleSubmit}>
-        <input
-          className="company-input"
-          type="text"
-          placeholder="Enter a company name, e.g. Infosys"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button className="btn-primary" type="submit">
-          Analyse
-        </button>
-      </form>
-
-      {error && <div className="error-text">{error}</div>}
-
-      <div className="preset-row">
-        {COMPANY_NAMES.map((name) => (
-          <button key={name} className="preset-chip" onClick={() => selectPreset(name)}>
-            {name}
-          </button>
+      <select
+        className="company-select"
+        value={selected}
+        onChange={handleChange}
+      >
+        <option value="">Select a company…</option>
+        {SORTED_NAMES.map((name) => (
+          <option key={name} value={name}>{name}</option>
         ))}
-      </div>
+      </select>
     </section>
   )
 }

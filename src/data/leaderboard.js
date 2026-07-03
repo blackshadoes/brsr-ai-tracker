@@ -37,26 +37,26 @@ import { COMPANY_NAMES } from './companies'
 export const MAX_DISCLOSURE_SCORE = 8
 
 export const DISCLOSURE_SCORES = {
-  TCS: 0,
+  'Tata Consultancy Services': 0,
   Infosys: 0,
-  Wipro: 0,
   'HCL Technologies': 0,
+  Wipro: 0,
   'Tech Mahindra': 0,
   LTIMindtree: 0,
-  Mphasis: 0,
+  'Oracle Financial Services Software': 0,
   'Persistent Systems': 0,
   Coforge: 0,
-  'KPIT Technologies': 0,
-  Hexaware: 0,
-  Zensar: 0,
-  Mastek: 0,
-  Birlasoft: 0,
-  'Sonata Software': 0,
-  Firstsource: 0,
-  'Happiest Minds': 0,
+  Mphasis: 0,
+  'Hexaware Technologies': 0,
   'Tata Elxsi': 0,
+  Birlasoft: 0,
   Cyient: 0,
-  Sasken: 0,
+  'Sonata Software': 0,
+  Mastek: 0,
+  'Firstsource Solutions': 0,
+  'Happiest Minds Technologies': 0,
+  'Zensar Technologies': 0,
+  'KPIT Technologies': 0,
 }
 
 export function getLeaderboard() {
