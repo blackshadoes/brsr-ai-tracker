@@ -1340,6 +1340,9 @@ a { color: var(--accent); }
   font-weight: 700;
 }
 
+/* WUE comparison table */
+.bench-wue-table td:first-child { width: 220px; }
+
 /* Benchmarks table */
 .bench-table td:first-child {
   width: 200px;

@@ -6,7 +6,7 @@ import WaterBackground from './WaterBackground'
 import { COMPANY_NAMES, COMPANIES, findCompany } from '../data/companies'
 
 const STATS = [
-  { value: '1.8L', label: 'water consumed per kWh of AI compute' },
+  { value: '0.1–1.8L', label: 'Industry range based on disclosed hyperscaler data (UC Riverside, 2026). Indian IT companies disclose none of it.' },
   { value: '0', label: 'Indian IT companies disclose AI water use in BRSR' },
   { value: '50M+', label: 'litres estimated annual AI cooling water use across the top 20 IT companies' },
 ]

@@ -13,6 +13,45 @@ export default function Benchmarks() {
 
       <div className="meth-body">
         <section className="meth-section">
+          <h2 className="meth-section-title">Water Usage Effectiveness — disclosed comparisons</h2>
+          <p>
+            Recent research provides the first peer-reviewed cross-hyperscaler WUE dataset.
+            The table below shows disclosed figures alongside this tool's estimate.
+          </p>
+          <table className="meth-table bench-table bench-wue-table">
+            <thead>
+              <tr>
+                <th>Data point</th>
+                <th>WUE value</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Microsoft FY24</strong></td>
+                <td className="bench-val">0.30 L / kWh</td>
+                <td>Microsoft Environmental Sustainability Report 2025</td>
+              </tr>
+              <tr>
+                <td><strong>Industry range (hyperscalers)</strong></td>
+                <td className="bench-val">0.06 – 1.36 L / kWh</td>
+                <td>Han et al., arXiv:2603.02705, March 2026 (UC Riverside)</td>
+              </tr>
+              <tr>
+                <td><strong>This tool's estimate</strong></td>
+                <td className="bench-val">1.80 L / kWh</td>
+                <td>Conservative upper bound — see note below</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="meth-note">
+            We use 1.80 L/kWh as a conservative upper bound to surface maximum potential
+            exposure. Actual values for Indian IT companies are unknown because none
+            currently disclose this metric.
+          </p>
+        </section>
+
+        <section className="meth-section">
           <h2 className="meth-section-title">Technical assumptions</h2>
           <table className="meth-table bench-table">
             <thead>
@@ -26,9 +65,9 @@ export default function Benchmarks() {
             <tbody>
               <tr>
                 <td><strong>Water Usage Effectiveness (WUE)</strong></td>
-                <td className="bench-val">1.8 L / kWh</td>
-                <td>Google Environmental Report 2023 (~1.1 L/kWh); Microsoft Global Sustainability Report 2023 (~1.8 L/kWh); IEA Data Centres &amp; Data Transmission Networks 2023</td>
-                <td>Published WUE ranges from 1.1 to 3.0 L/kWh across hyperscalers and older Indian data centers. 1.8 is a central estimate; companies with newer facilities will be lower, older or air-cooled sites higher.</td>
+                <td className="bench-val">1.80 L / kWh</td>
+                <td>Conservative upper bound based on industry range of 0.06–1.36 L/kWh (Han et al., arXiv:2603.02705, 2026) and older Indian data center profiles. Microsoft FY24 disclosed 0.30 L/kWh.</td>
+                <td>Likely overstates consumption for companies using modern hyperscale infrastructure. Used deliberately to surface maximum potential exposure given zero disclosure from Indian IT companies.</td>
               </tr>
               <tr>
                 <td><strong>India Grid Emission Factor</strong></td>
