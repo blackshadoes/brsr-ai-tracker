@@ -1042,6 +1042,28 @@ a { color: var(--accent); }
   letter-spacing: 0.1px;
 }
 
+.site-footer {
+  text-align: center;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+}
+
+.site-footer p {
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.site-footer p:last-child { margin-bottom: 0; }
+
+.site-footer a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 
 /* ── Responsive ──────────────────────────────────────────────── */
 
