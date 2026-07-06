@@ -82,7 +82,7 @@ export default function App() {
 
       <footer className="site-footer">
         <p>Built by Chhaya Rani · ESG Researcher · Independent</p>
-        <p>Contact: <a href="mailto:sweetypatna7@gmail.com">sweetypatna7@gmail.com</a></p>
+        <p>Contact: <a href="mailto:rchhaya537@gmail.com">rchhaya537@gmail.com</a></p>
         <p>All estimates are illustrative and based on public data and industry benchmarks. Not official company disclosures.</p>
       </footer>
     </div>
