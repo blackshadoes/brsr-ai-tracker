@@ -1188,6 +1188,21 @@ a { color: var(--accent); }
   font-style: italic;
 }
 
+.companies-pending-note {
+  font-size: 13px;
+  color: var(--muted);
+  border-left: 3px solid var(--border-strong);
+  padding: 10px 14px;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+
+/* Non-clickable company rows */
+.lboard-tr-static {
+  cursor: default;
+}
+.lboard-tr-static:hover { background: transparent; }
+
 @media (max-width: 720px) {
   .lboard-td-sector { display: none; }
   .lboard-th-sector { display: none; }
@@ -1301,6 +1316,22 @@ a { color: var(--accent); }
   font-family: 'Georgia', 'Times New Roman', serif;
   color: var(--accent) !important;
   font-weight: 700;
+}
+
+/* Benchmarks table */
+.bench-table td:first-child {
+  width: 200px;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+  font-family: inherit !important;
+}
+
+.bench-val {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--accent);
+  white-space: nowrap;
 }
 
 /* Benchmark grid */

@@ -65,7 +65,7 @@ export default function Hero({ onSelectCompany, onShowLeaderboard }) {
             type="button"
             onClick={onShowLeaderboard}
           >
-            Leaderboard
+            Companies
           </button>
         </div>
 

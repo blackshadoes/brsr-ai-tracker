@@ -3,10 +3,24 @@ import Landing from './components/Landing'
 import Dashboard from './components/Dashboard'
 import LeaderboardPage from './components/LeaderboardPage'
 import Methodology from './components/Methodology'
+import Benchmarks from './components/Benchmarks'
+import About from './components/About'
+
+const NAV = [
+  { id: 'leaderboard', label: 'Companies' },
+  { id: 'methodology', label: 'Methodology' },
+  { id: 'benchmarks',  label: 'Benchmarks' },
+  { id: 'about',       label: 'About' },
+]
 
 export default function App() {
   const [view, setView] = useState('landing')
   const [company, setCompany] = useState(null)
+
+  function nav(id) {
+    setView(id)
+    window.scrollTo({ top: 0 })
+  }
 
   function handleSelectCompany(c) {
     setCompany(c)
@@ -27,27 +41,23 @@ export default function App() {
           <button
             className="topbar-home-btn"
             type="button"
-            onClick={() => { setView('landing'); setCompany(null); window.scrollTo({ top: 0 }) }}
+            onClick={() => nav('landing')}
           >
             <span className="topbar-title">BRSR AI Tracker</span>
           </button>
           <span className="topbar-subtitle">AI environmental disclosure gap analysis</span>
         </div>
         <nav className="topbar-nav">
-          <button
-            type="button"
-            className={`topbar-nav-link${view === 'leaderboard' ? ' topbar-nav-active' : ''}`}
-            onClick={() => { setView('leaderboard'); window.scrollTo({ top: 0 }) }}
-          >
-            Leaderboard
-          </button>
-          <button
-            type="button"
-            className={`topbar-nav-link${view === 'methodology' ? ' topbar-nav-active' : ''}`}
-            onClick={() => { setView('methodology'); window.scrollTo({ top: 0 }) }}
-          >
-            Methodology
-          </button>
+          {NAV.map(({ id, label }) => (
+            <button
+              key={id}
+              type="button"
+              className={`topbar-nav-link${view === id ? ' topbar-nav-active' : ''}`}
+              onClick={() => nav(id)}
+            >
+              {label}
+            </button>
+          ))}
           {view === 'dashboard' && (
             <button className="btn-ghost" type="button" onClick={handleBack}>
               ← Back
@@ -60,20 +70,15 @@ export default function App() {
         {view === 'landing' && (
           <Landing
             onSelectCompany={handleSelectCompany}
-            onShowLeaderboard={() => { setView('leaderboard'); window.scrollTo({ top: 0 }) }}
+            onShowLeaderboard={() => nav('leaderboard')}
           />
         )}
-        {view === 'dashboard' && company && (
-          <Dashboard company={company} />
-        )}
-        {view === 'leaderboard' && (
-          <LeaderboardPage onSelectCompany={handleSelectCompany} onBack={handleBack} />
-        )}
-        {view === 'methodology' && (
-          <Methodology onBack={handleBack} />
-        )}
+        {view === 'dashboard' && company && <Dashboard company={company} />}
+        {view === 'leaderboard'  && <LeaderboardPage />}
+        {view === 'methodology'  && <Methodology />}
+        {view === 'benchmarks'   && <Benchmarks />}
+        {view === 'about'        && <About />}
       </main>
-
     </div>
   )
 }
