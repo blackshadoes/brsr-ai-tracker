@@ -21,33 +21,44 @@ export default function Benchmarks() {
           <table className="meth-table bench-table bench-wue-table">
             <thead>
               <tr>
-                <th>Data point</th>
-                <th>WUE value</th>
                 <th>Source</th>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Notes</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Microsoft FY24</strong></td>
+                <td>Microsoft ESR FY24</td>
+                <td>Data centre WUE</td>
                 <td className="bench-val">0.30 L / kWh</td>
-                <td>Microsoft Environmental Sustainability Report 2025</td>
+                <td>Direct disclosure, data centres only</td>
               </tr>
               <tr>
-                <td><strong>Industry range (hyperscalers)</strong></td>
+                <td>UC Riverside (Han et al. 2026)</td>
+                <td>Hyperscaler WUE range</td>
                 <td className="bench-val">0.06 – 1.36 L / kWh</td>
-                <td>Han et al., arXiv:2603.02705, March 2026 (UC Riverside)</td>
+                <td>Computed from disclosed figures, arXiv:2603.02705</td>
               </tr>
               <tr>
-                <td><strong>This tool's estimate</strong></td>
+                <td>UC Riverside (Han et al. 2026)</td>
+                <td>Colocation WUE range</td>
+                <td className="bench-val">0.06 – 1.28 L / kWh</td>
+                <td>Computed from disclosed figures</td>
+              </tr>
+              <tr>
+                <td>This tool</td>
+                <td>Conservative upper bound</td>
                 <td className="bench-val">1.80 L / kWh</td>
-                <td>Conservative upper bound — see note below</td>
+                <td>Upper end of industry range, used to surface maximum potential exposure</td>
               </tr>
             </tbody>
           </table>
           <p className="meth-note">
-            We use 1.80 L/kWh as a conservative upper bound to surface maximum potential
-            exposure. Actual values for Indian IT companies are unknown because none
-            currently disclose this metric.
+            <strong>Note:</strong> WUE (Water Usage Effectiveness) is defined as data centre
+            water consumption divided by IT equipment energy. Whole-company water and energy
+            figures are not equivalent to WUE and should not be compared directly. No Indian
+            IT company currently discloses WUE or any AI-specific water metric.
           </p>
         </section>
 
