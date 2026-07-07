@@ -327,6 +327,18 @@ a { color: var(--accent); }
   border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.stats-footnote {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.50);
+  margin: 0;
+  padding: 10px 16px;
+  background: rgba(8, 18, 30, 0.50);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  line-height: 1.5;
+}
+
 .stat-card {
   padding: 28px 26px;
   border-right: 1px solid rgba(255, 255, 255, 0.12);

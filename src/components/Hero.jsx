@@ -8,7 +8,7 @@ import { COMPANY_NAMES, COMPANIES, findCompany } from '../data/companies'
 const STATS = [
   { value: '0.1–1.8L', label: 'Industry range based on disclosed hyperscaler data (UC Riverside, 2026). Indian IT companies disclose none of it.' },
   { value: '0', label: 'Indian IT companies disclose AI water use in BRSR' },
-  { value: '50M+', label: 'litres est. annual AI cooling water use across top 20 IT companies (modelled at 1.8L/kWh WUE benchmark, UC Riverside 2024)' },
+  { value: '~40M', label: 'Estimated annual AI cooling water use across top 20 Indian IT companies — based on modelled GPU hours and 1.8 L/kWh WUE upper bound. No company discloses this figure.' },
 ]
 
 function StatCard({ stat, delay }) {
@@ -74,6 +74,11 @@ export default function Hero({ onSelectCompany, onShowLeaderboard }) {
             <StatCard key={s.label} stat={s} delay={i * 150} />
           ))}
         </div>
+        <p className="stats-footnote">
+          * All figures are modelled estimates using publicly available benchmarks. Actual
+          values are unknown because no Indian IT company discloses AI-specific water
+          consumption in their BRSR filing.
+        </p>
       </div>
 
       {showPicker && (
